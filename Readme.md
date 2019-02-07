@@ -1,7 +1,7 @@
 # Xam.Forms.VideoPlayer control for Xamarin Forms
 
 #### Setup
-* Available on NuGet: https://www.nuget.org/packages/ 
+* Available on NuGet: https://www.nuget.org/packages/Xam.Forms.VideoPlayer/ 
 * Install in your .Net Standard 2.0 and client projects.
 
 **Platform Support**
