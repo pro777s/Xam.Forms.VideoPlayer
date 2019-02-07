@@ -33,6 +33,8 @@ In UWP platform:
 ```
 ```
 
+For more information, see the folder Samples.
+
 #### Release Notes
 
 1.0.0
