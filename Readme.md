@@ -38,6 +38,10 @@ For more information, see the folder Samples.
 #### Release Notes
 
 1.0.0
-[All] Added the ability to show/hide window statusbar  using IStatusbar interface.
+
+[All] Added the ability to show/hide window statusbar using IStatusbar interface.
+
 [Android] Added the ability to enter/exit full-screen mode using FullscreenMediaController class. Added the corresponding button in the video player interface.
+
 [All] Implemented the event PlayCompletion announcing the end of playback.
+
