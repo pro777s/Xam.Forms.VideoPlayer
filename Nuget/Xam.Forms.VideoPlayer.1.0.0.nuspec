@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Xam.Forms.VideoPlayer</id>
+    <version>1.0.0</version>
+    <title>Video Player Control for Xamarin.Forms</title>
+    <authors>Roman Pristinsky</authors>
+    <owners>pro777</owners>
+    <projectUrl>https://github.com/pro777s/Xam.Forms.VideoPlayer</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The package Xam.Forms.VideoPlayer is intended for Xamarin.Forms, contains a cross-platform video player for Android, iOS and Windows UWP, based on the code provided by Charles Petzold. 
+More information about the video player can be found here: https://developer.xamarin.com/samples/xamarin-forms/customrenderers/VideoPlayerDemos/.
+This package can be freely used for distribution, commercial use and modification.</description>
+    <summary>The package Xam.Forms.VideoPlayer is intended for Xamarin.Forms, contains a cross-platform video player for Android, iOS and Windows UWP, based on the code provided by Charles Petzold.</summary>
+    <releaseNotes>1.0.0
+[All] Added the ability to show/hide window statusbar  using IStatusbar interface.
+[Android] Added the ability to enter/exit full-screen mode using FullscreenMediaController class. Added the corresponding button in the video player interface.
+[All] Implemented the event PlayCompletion announcing the end of playback.</releaseNotes>
+    <tags>Xamarin, VideoPlayer</tags>
+    <dependencies>
+      <group>
+        <dependency id="Xamarin.Forms" version="3.5.0.129452" />
+      </group>
+    </dependencies>
+    <references>    
+        <group> 
+            <reference file="Xam.Forms.VideoPlayer.dll" />
+        </group>   
+        <group targetFramework="MonoAndroid81">
+            <reference file="Xam.Forms.VideoPlayer.Android.dll" />
+        </group>   
+        <group targetFramework="Xamarin.iOS10"> 
+            <reference file="Xam.Forms.VideoPlayer.iOS.dll" />
+        </group>    
+        <group targetFramework="UAP10.0">   
+            <reference file="Xam.Forms.VideoPlayer.UWP.dll" />
+        </group>    
+    </references>
+  </metadata>
+  <files>
+
+    <!--netstandard-->
+    <file src="..\Xam.Forms.VideoPlayer\bin\Release\netstandard2.0\Xam.Forms.VideoPlayer.dll" target="lib\netstandard2.0" />
+
+    <!--Android 81-->
+    <file src="..\Xam.Forms.VideoPlayer.Android\bin\Release\ru\Xam.Forms.VideoPlayer.Android.resources.dll" target="lib\MonoAndroid81\ru" />
+    <file src="..\Xam.Forms.VideoPlayer.Android\bin\Release\Xam.Forms.VideoPlayer.Android.dll" target="lib\MonoAndroid81" />
+    <file src="..\Xam.Forms.VideoPlayer.Android\bin\Release\Xam.Forms.VideoPlayer.dll" target="lib\MonoAndroid81" />
+
+    <!--iPhone Unified-->
+    <file src="..\Xam.Forms.VideoPlayer.iOS\bin\Release\Xam.Forms.VideoPlayer.dll" target="lib\Xamarin.iOS10" />
+    <file src="..\Xam.Forms.VideoPlayer.iOS\bin\Release\Xam.Forms.VideoPlayer.iOS.dll" target="lib\Xamarin.iOS10" />
+
+    <!--UWP-->
+    <file src="..\Xam.Forms.VideoPlayer.UWP\bin\Release\Xam.Forms.VideoPlayer.dll" target="lib\UAP10.0" />
+    <file src="..\Xam.Forms.VideoPlayer.UWP\bin\Release\Xam.Forms.VideoPlayer.UWP.dll" target="lib\UAP10.0" />
+    <file src="..\Xam.Forms.VideoPlayer.UWP\bin\Release\Xam.Forms.VideoPlayer.UWP.pri" target="lib\UAP10.0" />
+
+  </files>
+</package>

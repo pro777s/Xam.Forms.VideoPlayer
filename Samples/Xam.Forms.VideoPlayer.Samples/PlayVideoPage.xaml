@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:video="clr-namespace:Xam.Forms.VideoPlayer;assembly=Xam.Forms.VideoPlayer"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource BackColor}"
+             x:Class="Xam.Forms.VideoPlayer.Samples.PlayVideoPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BackColor">Black</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <video:VideoPlayer Grid.Row="0" x:Name="videoPlayer"
+                BackgroundColor="{StaticResource BackColor}"
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="FillAndExpand"
+                PlayCompletion="VideoPlayer_PlayCompletion"/>
+            <ActivityIndicator Grid.Row="0" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Color="White"
+                BackgroundColor="Transparent"
+                IsVisible="False">
+                <ActivityIndicator.Triggers>
+                    <DataTrigger TargetType="ActivityIndicator"
+                                 Binding="{Binding Source={x:Reference videoPlayer}, 
+                                                   Path=Status}"
+                                 Value="{x:Static video:VideoStatus.NotReady}">
+                        <Setter Property="IsVisible" Value="True" />
+                        <Setter Property="IsRunning" Value="True" />
+                    </DataTrigger>
+                </ActivityIndicator.Triggers>
+            </ActivityIndicator>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
