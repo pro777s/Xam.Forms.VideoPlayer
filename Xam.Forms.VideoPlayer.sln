@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xam.Forms.VideoPlayer.UWP",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{C648368A-FAD1-4A66-9CD8-6C0A0B18672C}"
 	ProjectSection(SolutionItems) = preProject
-		Nuget\Xam.Forms.VideoPlayer.1.0.0.nuspec = Nuget\Xam.Forms.VideoPlayer.1.0.0.nuspec
+		Nuget\Xam.Forms.VideoPlayer.1.0.1.nuspec = Nuget\Xam.Forms.VideoPlayer.1.0.1.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4168CB72-8C15-4AB8-ADB3-9A476B49A319}"

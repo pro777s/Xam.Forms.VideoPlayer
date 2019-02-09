@@ -13,7 +13,9 @@
 More information about the video player can be found here: https://developer.xamarin.com/samples/xamarin-forms/customrenderers/VideoPlayerDemos/.
 This package can be freely used for distribution, commercial use and modification.</description>
     <summary>The package Xam.Forms.VideoPlayer is intended for Xamarin.Forms, contains a cross-platform video player for Android, iOS and Windows UWP, based on the code provided by Charles Petzold.</summary>
-    <releaseNotes>1.0.0
+    <releaseNotes>1.0.1
+[All] Added the event handler PlayError an play error occur. Made changes to the file nuspec.
+1.0.0
 [All] Added the ability to show/hide window statusbar  using IStatusbar interface.
 [Android] Added the ability to enter/exit full-screen mode using FullscreenMediaController class. Added the corresponding button in the video player interface.
 [All] Implemented the event PlayCompletion announcing the end of playback.</releaseNotes>
@@ -25,19 +27,19 @@ This package can be freely used for distribution, commercial use and modificatio
     </dependencies>
     <references>
       <group targetFramework=".NETStandard2.0">
-        <reference file="Xam.Plugins.VideoPlayer.dll" />
+        <reference file="Xam.Forms.VideoPlayer.dll" />
       </group>
       <group targetFramework="MonoAndroid81">
-        <reference file="Xam.Plugins.VideoPlayer.dll" />
-        <reference file="Xam.Plugins.VideoPlayer.Android.dll" />
+        <reference file="Xam.Forms.VideoPlayer.dll" />
+        <reference file="Xam.Forms.VideoPlayer.Android.dll" />
       </group>
       <group targetFramework="Xamarin.iOS10">
-        <reference file="Xam.Plugins.VideoPlayer.dll" />
-        <reference file="Xam.Plugins.VideoPlayer.iOS.dll" />
+        <reference file="Xam.Forms.VideoPlayer.dll" />
+        <reference file="Xam.Forms.VideoPlayer.iOS.dll" />
       </group>
       <group targetFramework="UAP10.0">
-        <reference file="Xam.Plugins.VideoPlayer.dll" />
-        <reference file="Xam.Plugins.VideoPlayer.UWP.dll" />
+        <reference file="Xam.Forms.VideoPlayer.dll" />
+        <reference file="Xam.Forms.VideoPlayer.UWP.dll" />
       </group>
     </references>
   </metadata>
