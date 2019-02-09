@@ -23,19 +23,22 @@ This package can be freely used for distribution, commercial use and modificatio
         <dependency id="Xamarin.Forms" version="3.5.0.129452" />
       </group>
     </dependencies>
-    <references>    
-        <group> 
-            <reference file="Xam.Forms.VideoPlayer.dll" />
-        </group>   
-        <group targetFramework="MonoAndroid81">
-            <reference file="Xam.Forms.VideoPlayer.Android.dll" />
-        </group>   
-        <group targetFramework="Xamarin.iOS10"> 
-            <reference file="Xam.Forms.VideoPlayer.iOS.dll" />
-        </group>    
-        <group targetFramework="UAP10.0">   
-            <reference file="Xam.Forms.VideoPlayer.UWP.dll" />
-        </group>    
+    <references>
+      <group targetFramework=".NETStandard2.0">
+        <reference file="Xam.Plugins.VideoPlayer.dll" />
+      </group>
+      <group targetFramework="MonoAndroid81">
+        <reference file="Xam.Plugins.VideoPlayer.dll" />
+        <reference file="Xam.Plugins.VideoPlayer.Android.dll" />
+      </group>
+      <group targetFramework="Xamarin.iOS10">
+        <reference file="Xam.Plugins.VideoPlayer.dll" />
+        <reference file="Xam.Plugins.VideoPlayer.iOS.dll" />
+      </group>
+      <group targetFramework="UAP10.0">
+        <reference file="Xam.Plugins.VideoPlayer.dll" />
+        <reference file="Xam.Plugins.VideoPlayer.UWP.dll" />
+      </group>
     </references>
   </metadata>
   <files>
