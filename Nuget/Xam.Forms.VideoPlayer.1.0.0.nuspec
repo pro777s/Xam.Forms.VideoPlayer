@@ -2,12 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Xam.Forms.VideoPlayer</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>Video Player Control for Xamarin.Forms</title>
     <authors>Roman Pristinsky</authors>
     <owners>pro777</owners>
     <projectUrl>https://github.com/pro777s/Xam.Forms.VideoPlayer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
     <description>The package Xam.Forms.VideoPlayer is intended for Xamarin.Forms, contains a cross-platform video player for Android, iOS and Windows UWP, based on the code provided by Charles Petzold. 
 More information about the video player can be found here: https://developer.xamarin.com/samples/xamarin-forms/customrenderers/VideoPlayerDemos/.
 This package can be freely used for distribution, commercial use and modification.</description>

@@ -37,6 +37,11 @@ For more information, see the folder Samples.
 
 #### Release Notes
 
+1.0.1
+
+[All] Added the event handler PlayError an play error occur.
+
+
 1.0.0
 
 [All] Added the ability to show/hide window statusbar using IStatusbar interface.

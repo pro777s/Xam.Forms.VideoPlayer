@@ -33,6 +33,7 @@ namespace Xam.Forms.VideoPlayer.UWP
                     mediaElement.MediaOpened += OnMediaElementMediaOpened;
                     mediaElement.CurrentStateChanged += OnMediaElementCurrentStateChanged;
                     mediaElement.MediaEnded += OnMediaElement_MediaEnded;
+                    mediaElement.MediaFailed += MediaElement_MediaFailed;
                 }
 
                 SetAreTransportControlsEnabled();
@@ -57,6 +58,11 @@ namespace Xam.Forms.VideoPlayer.UWP
         private void OnMediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
             Element.OnPlayCompletion();
+        }
+
+        private void MediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            Element.OnPlayError(sender, new VideoPlayer.PlayErrorEventArgs(e.ErrorMessage));
         }
 
         protected override void Dispose(bool disposing)

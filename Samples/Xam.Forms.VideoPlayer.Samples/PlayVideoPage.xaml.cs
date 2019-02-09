@@ -34,5 +34,10 @@ namespace Xam.Forms.VideoPlayer.Samples
         {
             await Navigation.PopAsync();
         }
+
+        private async void VideoPlayer_PlayError(object sender, VideoPlayer.PlayErrorEventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }

@@ -138,5 +138,18 @@ namespace Xam.Forms.VideoPlayer
         {
             PlayCompletion?.Invoke(this, EventArgs.Empty);
         }
+
+        public class PlayErrorEventArgs : EventArgs
+        {
+            public string ErrorMessage;
+            public PlayErrorEventArgs(string errorMessage) { ErrorMessage = errorMessage; }
+        }
+        public delegate void PlayErrorEventHandler(object sender, PlayErrorEventArgs e);
+        public event PlayErrorEventHandler PlayError;
+
+        public void OnPlayError(object sender, PlayErrorEventArgs e)
+        {
+            PlayError?.Invoke(sender, e);
+        }
     }
 }

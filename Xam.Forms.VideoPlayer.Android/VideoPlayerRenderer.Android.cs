@@ -78,6 +78,7 @@ namespace Xam.Forms.VideoPlayer.Android
                     videoView = new VideoView(Context);
                     videoView.Info += VideoView_Info;
                     videoView.Completion += VideoView_Completion;
+                    videoView.Error += VideoView_Error;
 
                     // Put the VideoView in a RelativeLayout
                     ARelativeLayout relativeLayout = new ARelativeLayout(Context);
@@ -111,6 +112,11 @@ namespace Xam.Forms.VideoPlayer.Android
                 args.OldElement.PauseRequested -= OnPauseRequested;
                 args.OldElement.StopRequested -= OnStopRequested;
             }
+        }
+
+        private void VideoView_Error(object sender, MediaPlayer.ErrorEventArgs e)
+        {
+            Element.OnPlayError(sender, new VideoPlayer.PlayErrorEventArgs(e.What.ToString()));
         }
 
         private void VideoView_Completion(object sender, EventArgs e)

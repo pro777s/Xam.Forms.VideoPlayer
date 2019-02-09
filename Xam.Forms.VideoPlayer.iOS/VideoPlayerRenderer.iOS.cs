@@ -24,7 +24,7 @@ namespace Xam.Forms.VideoPlayer.iOS
         AVPlayer player;
         AVPlayerItem playerItem;
         AVPlayerViewController _playerViewController;       // solely for ViewController property
-        NSObject playCompleteObserver;
+        NSObject playCompleteNotification, playerItemFailedToPlayToEndTimeNotification;
 
         public override UIViewController ViewController => _playerViewController;
 
@@ -43,9 +43,14 @@ namespace Xam.Forms.VideoPlayer.iOS
                     player = new AVPlayer();
                     _playerViewController.Player = player;
 
-                    playCompleteObserver = NSNotificationCenter.DefaultCenter.AddObserver(
+                    // End of play notification
+                    playCompleteNotification = NSNotificationCenter.DefaultCenter.AddObserver(
                         AVPlayerItem.DidPlayToEndTimeNotification,
                         OnAVPlayerItemDidPlayToEndTime, player.CurrentItem);
+
+                    //  Play error occured notification
+                    playerItemFailedToPlayToEndTimeNotification = 
+                        AVPlayerItem.Notifications.ObserveItemFailedToPlayToEndTime(OnAVPlayerItemFailedToPlayToEndTime);
 
                     // Use the View from the controller as the native control
                     SetNativeControl(_playerViewController.View);
@@ -69,9 +74,14 @@ namespace Xam.Forms.VideoPlayer.iOS
             }
         }
 
-        public void OnAVPlayerItemDidPlayToEndTime(NSNotification notification)
+        private void OnAVPlayerItemDidPlayToEndTime(NSNotification notification)
         {
             Element.OnPlayCompletion();
+        }
+
+        private void OnAVPlayerItemFailedToPlayToEndTime(object sender, AVPlayerItemErrorEventArgs e)
+        {
+            Element.OnPlayError(sender, new VideoPlayer.PlayErrorEventArgs(player.Error?.Description));
         }
 
         protected override void Dispose(bool disposing)
@@ -80,7 +90,9 @@ namespace Xam.Forms.VideoPlayer.iOS
 
             if (player != null)
             {
-                NSNotificationCenter.DefaultCenter.RemoveObserver(playCompleteObserver);
+
+                playerItemFailedToPlayToEndTimeNotification.Dispose();
+                NSNotificationCenter.DefaultCenter.RemoveObserver(playCompleteNotification);
                 player.ReplaceCurrentItemWithPlayerItem(null);
             }
         }

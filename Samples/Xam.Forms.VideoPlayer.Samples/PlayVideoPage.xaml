@@ -19,7 +19,8 @@
                 BackgroundColor="{StaticResource BackColor}"
                 HorizontalOptions="FillAndExpand" 
                 VerticalOptions="FillAndExpand"
-                PlayCompletion="VideoPlayer_PlayCompletion"/>
+                PlayCompletion="VideoPlayer_PlayCompletion" 
+                PlayError="VideoPlayer_PlayError"/>
             <ActivityIndicator Grid.Row="0" 
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
