@@ -12,11 +12,13 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xam.Forms.VideoPlayer;
 using Xam.Forms.VideoPlayer.Android;
+using Android.Graphics;
 using Android.Media;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Runtime;
 using Java.Util;
+using Color = Android.Graphics.Color;
 
 [assembly: ExportRenderer(typeof(VideoPlayer), typeof(VideoPlayerRenderer))]
 
@@ -61,10 +63,7 @@ namespace Xam.Forms.VideoPlayer.Android
         {
         }
 
-        public static void Init(Activity mainActivity)
-        {
-            MainActivity.Init(mainActivity);
-        }
+        public static void Init() { }
 
         protected override void OnElementChanged(ElementChangedEventArgs<VideoPlayer> args)
         {
@@ -76,6 +75,7 @@ namespace Xam.Forms.VideoPlayer.Android
                 {
                     // Save the VideoView for future reference
                     videoView = new VideoView(Context);
+                    videoView.SetBackgroundColor(Color.Transparent);
                     videoView.Info += VideoView_Info;
                     videoView.Completion += VideoView_Completion;
                     videoView.Error += VideoView_Error;
@@ -235,7 +235,7 @@ namespace Xam.Forms.VideoPlayer.Android
 
                 if (!String.IsNullOrWhiteSpace(path))
                 {
-                    string filename = Path.GetFileNameWithoutExtension(path).ToLowerInvariant();
+                    string filename = System.IO.Path.GetFileNameWithoutExtension(path).ToLowerInvariant();
                     string uri = "android.resource://" + package + "/raw/" + filename;
                     videoView.SetVideoURI(NSUri.Parse(uri));
                     hasSetSource = true;

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Xam.Forms.VideoPlayer</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>Video Player Control for Xamarin.Forms</title>
     <authors>Roman Pristinsky</authors>
     <owners>pro777</owners>
@@ -13,7 +13,10 @@
 More information about the video player can be found here: https://developer.xamarin.com/samples/xamarin-forms/customrenderers/VideoPlayerDemos/.
 This package can be freely used for distribution, commercial use and modification.</description>
     <summary>The package Xam.Forms.VideoPlayer is intended for Xamarin.Forms, contains a cross-platform video player for Android, iOS and Windows UWP, based on the code provided by Charles Petzold.</summary>
-    <releaseNotes>1.0.1
+    <releaseNotes>1.0.2
+[Android] Changed class MainActivity. Now it implements the interface IActivityLifecycleCallbacks. 
+[All] Made refactoring and minor bugs fixed.
+1.0.1
 [All] Added the event handler PlayError an play error occur. Made changes to the file nuspec.
 1.0.0
 [All] Added the ability to show/hide window statusbar  using IStatusbar interface.

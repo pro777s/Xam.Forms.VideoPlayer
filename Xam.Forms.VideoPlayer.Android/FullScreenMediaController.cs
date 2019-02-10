@@ -89,7 +89,7 @@ namespace Xam.Forms.VideoPlayer.Android
 
         public static bool IsFullScreen()
         {
-            var activity = MainActivity.Current;
+            var activity = MainActivity.Current as Activity;
             var attrs = activity.Window.Attributes;
             return (attrs.Flags & WindowManagerFlags.Fullscreen) == WindowManagerFlags.Fullscreen;
         }

@@ -149,7 +149,7 @@ namespace Xam.Forms.VideoPlayer
 
         public void OnPlayError(object sender, PlayErrorEventArgs e)
         {
-            PlayError?.Invoke(sender, e);
+            PlayError?.Invoke(this, e);
         }
     }
 }

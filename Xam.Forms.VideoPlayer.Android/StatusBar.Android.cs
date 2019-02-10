@@ -22,9 +22,7 @@ namespace Xam.Forms.VideoPlayer.Android
 
         public void HideStatusBar()
         {
-            if (MainActivity.Current == null)
-                return;
-            var activity = MainActivity.Current;
+            var activity = MainActivity.Current as Activity;
             activity.Window.AddFlags(WindowManagerFlags.Fullscreen);
         }
 
@@ -32,7 +30,7 @@ namespace Xam.Forms.VideoPlayer.Android
         {
             if (MainActivity.Current == null)
                 return;
-            var activity = MainActivity.Current;
+            var activity = MainActivity.Current as Activity;
             activity.Window.ClearFlags(WindowManagerFlags.Fullscreen);
         }
 

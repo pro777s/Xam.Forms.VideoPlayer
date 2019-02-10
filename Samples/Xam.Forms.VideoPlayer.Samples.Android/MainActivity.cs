@@ -19,7 +19,7 @@ namespace Xam.Forms.VideoPlayer.Samples.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            Xam.Forms.VideoPlayer.Android.VideoPlayerRenderer.Init(this);
+            Xam.Forms.VideoPlayer.Android.VideoPlayerRenderer.Init();
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
@@ -27,19 +27,7 @@ namespace Xam.Forms.VideoPlayer.Samples.Droid
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-
-            if (requestCode == Android.MainActivity.PickImageId)
-            {
-                if ((resultCode == Result.Ok) && (data != null))
-                {
-                    // Set the filename as the completion of the Task
-                    Android.MainActivity.PickImageTaskCompletionSource.SetResult(data.DataString);
-                }
-                else
-                {
-                    Android.MainActivity.PickImageTaskCompletionSource.SetResult(null);
-                }
-            }
+            Android.VideoPicker.OnActivityResult(requestCode, resultCode, data);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Xam.Forms.VideoPlayer.iOS
 {
     public class VideoPlayerRenderer : ViewRenderer<VideoPlayer, UIView>
     {
-        public static new void Init() { }
+        public new static void Init() { }
 
         AVPlayer player;
         AVPlayerItem playerItem;

@@ -17,7 +17,7 @@
 In your Android projects (MainActivity.cs) call:
 
 ```
-Xam.Forms.VideoPlayer.Android.VideoPlayerRenderer.Init(this);
+Xam.Forms.VideoPlayer.Android.VideoPlayerRenderer.Init();
 Xamarin.Forms.Init();
 ```
 
@@ -36,6 +36,12 @@ In UWP platform:
 For more information, see the folder Samples.
 
 #### Release Notes
+
+1.0.2
+[Android] Changed class MainActivity. Now it implements the interface IActivityLifecycleCallbacks. 
+
+[All] Made refactoring and minor bugs fixed.
+
 
 1.0.1
 

@@ -39,5 +39,11 @@ namespace Xam.Forms.VideoPlayer.Samples
         {
             await Navigation.PopAsync();
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            videoPlayer.Stop();
+        }
     }
 }

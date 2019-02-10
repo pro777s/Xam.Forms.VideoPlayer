@@ -12,15 +12,43 @@ using Android.Widget;
 
 namespace Xam.Forms.VideoPlayer.Android
 {
-    public static class MainActivity
+    [Application]
+    public partial class MainActivity : Application, Application.IActivityLifecycleCallbacks
     {
-        public static Activity Current { get; private set; } = null;
-        public static readonly int PickImageId = 1000;
-        public static TaskCompletionSource<string> PickImageTaskCompletionSource { get; set; }
+        internal static Context Current { get; private set; }
 
-        internal static void Init(Activity mainActivity)
+        public MainActivity(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer) { }
+
+        public override void OnCreate()
         {
-            Current = mainActivity;
+            base.OnCreate();
+            RegisterActivityLifecycleCallbacks(this);
         }
+
+        public override void OnTerminate()
+        {
+            base.OnTerminate();
+            UnregisterActivityLifecycleCallbacks(this);
+        }
+
+        public void OnActivityCreated(Activity activity, Bundle savedInstanceState)
+        {
+            Current = activity;
+        }
+
+        public void OnActivityResumed(Activity activity)
+        {
+            Current = activity;
+        }
+
+        public void OnActivityStarted(Activity activity)
+        {
+            Current = activity;
+        }
+
+        public void OnActivityDestroyed(Activity activity) { }
+        public void OnActivityPaused(Activity activity) { }
+        public void OnActivitySaveInstanceState(Activity activity, Bundle outState) { }
+        public void OnActivityStopped(Activity activity) { }
     }
 }
