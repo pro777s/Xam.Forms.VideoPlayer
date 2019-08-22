@@ -37,6 +37,9 @@ For more information, see the folder Samples.
 
 #### Release Notes
 
+1.0.3
+[Android] Fixed positioning of the button for changing the visibility of the statusbar. Added video size output. 
+
 1.0.2
 [Android] Changed class MainActivity. Now it implements the interface IActivityLifecycleCallbacks. 
 
