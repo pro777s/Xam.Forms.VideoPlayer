@@ -26,6 +26,7 @@ namespace Xam.Forms.VideoPlayer.Samples
             videoPlayer.Source = _videoSource;
             if (Device.RuntimePlatform == Device.Android)
             {
+                //NavigationPage.SetHasNavigationBar(this, false);
                 DependencyService.Get<IStatusBar>().HideStatusBar();
             }
         }
@@ -42,8 +43,13 @@ namespace Xam.Forms.VideoPlayer.Samples
 
         protected override void OnDisappearing()
         {
-            base.OnDisappearing();
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                //NavigationPage.SetHasNavigationBar(this, true);
+                DependencyService.Get<IStatusBar>().ShowStatusBar();
+            }
             videoPlayer.Stop();
+            base.OnDisappearing();
         }
     }
 }

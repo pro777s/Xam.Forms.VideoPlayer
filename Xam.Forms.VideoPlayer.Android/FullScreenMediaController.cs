@@ -35,11 +35,14 @@ namespace Xam.Forms.VideoPlayer.Android
             base.SetAnchorView(view);
             ibFullScreen = new ImageButton(Context);
             ibFullScreen.SetBackgroundColor(Color.Transparent);
+            int layoutPx = DPtoPx(40, view.Context);
+            int topMarginPx = DPtoPx(10, view.Context);
+            int leftMarginPx = DPtoPx(5, view.Context);
             LayoutParams layoutParams =
-            new LayoutParams(120, 120, GravityFlags.NoGravity)
+            new LayoutParams(layoutPx, layoutPx, GravityFlags.NoGravity)
             {
-                TopMargin = 30,
-                LeftMargin = 15,
+                TopMargin = topMarginPx,
+                LeftMargin = leftMarginPx,
             };
             int imageId = IsFullScreen() ? fullScreenExitImageId : fullScreenImageId;
             ibFullScreen.SetImageResource(imageId);
@@ -47,6 +50,31 @@ namespace Xam.Forms.VideoPlayer.Android
             ibFullScreen.ScaleY = 0.5f;
             AddView(ibFullScreen, layoutParams);
             ibFullScreen.SetOnClickListener(new OnClickListener());
+            layoutParams =
+            new LayoutParams(DPtoPx(40, view.Context), DPtoPx(10, view.Context), GravityFlags.Right)
+            {
+                TopMargin = DPtoPx(5, view.Context),
+                //RightMargin = DPtoPx(5, view.Context),
+            };
+            tvVideoSize = new TextView(Context);
+            tvVideoSize.SetBackgroundColor(Color.Transparent);
+            tvVideoSize.SetTextColor(Color.White);
+            tvVideoSize.SetTextSize(ComplexUnitType.Pt, 4);
+            AddView(tvVideoSize, layoutParams);
+        }
+
+        public void ShowVideoSize(int width, int height)
+        {
+            if (tvVideoSize is null)
+                return;
+            string videoSizeText = width + "x" + height;
+            tvVideoSize.SetText(videoSizeText.ToCharArray(), 0, videoSizeText.Length);
+        }
+
+        private static int DPtoPx(float dp, Context context)
+        {
+            float fpx = TypedValue.ApplyDimension(ComplexUnitType.Dip, dp, context.Resources.DisplayMetrics);
+            return (int)Math.Round(fpx);
         }
 
         private static int GetResourceDrawableId(string imageFileName)

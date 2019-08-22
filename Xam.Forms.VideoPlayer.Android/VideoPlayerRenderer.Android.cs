@@ -57,7 +57,6 @@ namespace Xam.Forms.VideoPlayer.Android
         FullScreenMediaController mediaController;    // Used to display transport controls
         bool isPrepared;
         int videoHeight, videoWidth;
-        bool isHardwareAccelerated;
 
         public VideoPlayerRenderer(Context context) : base(context)
         {
@@ -130,8 +129,6 @@ namespace Xam.Forms.VideoPlayer.Android
             videoHeight = mp.VideoHeight;
             videoWidth = mp.VideoWidth;
             //mp.SetOnVideoSizeChangedListener(new MediaPlayerVideoSizeChangedListener());
-            if (mediaController != null)
-                isHardwareAccelerated = mediaController.IsHardwareAccelerated;
             MediaPlayer.TrackInfo[] trackInfoArray = mp.GetTrackInfo();
             MediaPlayer.TrackInfo videoTrack = new List<MediaPlayer.TrackInfo>(trackInfoArray)
                 .Where(x => x.TrackType == MediaTrackType.Video).FirstOrDefault();
@@ -140,6 +137,7 @@ namespace Xam.Forms.VideoPlayer.Android
                 int descrFlags = videoTrack.DescribeContents();
                 MediaFormat mediaFormat = videoTrack.Format;
             }
+            mediaController.ShowVideoSize(videoWidth, videoHeight);
         }
 
         protected override void Dispose(bool disposing)
