@@ -42,20 +42,12 @@ For more information, see the folder Samples.
 
 1.0.2
 [Android] Changed class MainActivity. Now it implements the interface IActivityLifecycleCallbacks. 
-
 [All] Made refactoring and minor bugs fixed.
 
-
 1.0.1
-
 [All] Added the event handler PlayError an play error occur.
 
-
 1.0.0
-
 [All] Added the ability to show/hide window statusbar using IStatusbar interface.
-
 [Android] Added the ability to enter/exit full-screen mode using FullscreenMediaController class. Added the corresponding button in the video player interface.
-
 [All] Implemented the event PlayCompletion announcing the end of playback.
-

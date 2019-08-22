@@ -8,6 +8,7 @@ using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 
@@ -18,6 +19,7 @@ namespace Xam.Forms.VideoPlayer.Android
         private static readonly int fullScreenImageId, fullScreenExitImageId;
         private ImageButton ibFullScreen;
         private StatusBar statusBar;
+        private TextView tvVideoSize;
 
         public FullScreenMediaController(Context context) : base(context) 
         {
