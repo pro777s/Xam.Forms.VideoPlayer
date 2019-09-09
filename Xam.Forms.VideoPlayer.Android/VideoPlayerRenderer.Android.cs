@@ -37,6 +37,8 @@ namespace Xam.Forms.VideoPlayer.Android
         public bool OnInfo(MediaPlayer mp, [GeneratedEnum] MediaInfo what, int extra)
         {
             MediaPlayer.TrackInfo[] trackInfoArray = mp.GetTrackInfo();
+            if (trackInfoArray == null)
+                return true;
             for (int i = 0; i < trackInfoArray.Length; i++)
             {
                 // you can switch out the language comparison logic to whatever works for you
@@ -130,12 +132,15 @@ namespace Xam.Forms.VideoPlayer.Android
             videoWidth = mp.VideoWidth;
             //mp.SetOnVideoSizeChangedListener(new MediaPlayerVideoSizeChangedListener());
             MediaPlayer.TrackInfo[] trackInfoArray = mp.GetTrackInfo();
-            MediaPlayer.TrackInfo videoTrack = new List<MediaPlayer.TrackInfo>(trackInfoArray)
-                .Where(x => x.TrackType == MediaTrackType.Video).FirstOrDefault();
-            if (videoTrack != null)
+            if (trackInfoArray != null)
             {
-                int descrFlags = videoTrack.DescribeContents();
-                MediaFormat mediaFormat = videoTrack.Format;
+                MediaPlayer.TrackInfo videoTrack = new List<MediaPlayer.TrackInfo>(trackInfoArray)
+                .Where(x => x.TrackType == MediaTrackType.Video).FirstOrDefault();
+                if (videoTrack != null)
+                {
+                    int descrFlags = videoTrack.DescribeContents();
+                    MediaFormat mediaFormat = videoTrack.Format;
+                }
             }
             mediaController.ShowVideoSize(videoWidth, videoHeight);
         }

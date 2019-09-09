@@ -56,7 +56,7 @@ namespace Xam.Forms.VideoPlayer.Samples.UWP
                 // For Release configuration, you need to add code to resolve dependencies, 
                 // as described here: https://docs.microsoft.com/ru-ru/xamarin/xamarin-forms/internals/dependency-resolution.
                 Xamarin.Forms.DependencyService.Register<VideoPicker>();
-                //Xam.Forms.VideoPlayer.UWP.VideoPlayerRenderer.Init();
+                Xam.Forms.VideoPlayer.UWP.VideoPlayerRenderer.Init();
                 Xamarin.Forms.Forms.Init(e);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)

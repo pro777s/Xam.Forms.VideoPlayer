@@ -31,11 +31,20 @@ Xamarin.Forms.Init();
 In UWP platform:
 
 ```
+Xamarin.Forms.DependencyService.Register<VideoPicker>();
+Xam.Forms.VideoPlayer.UWP.VideoPlayerRenderer.Init();
+Xamarin.Forms.Forms.Init(e);
 ```
 
 For more information, see the folder Samples.
 
 #### Release Notes
+
+1.0.4
+
+[All] Fixed a potential error that occurred when calculating the remaining playback time.
+[Android] Increased font size to display video size.
+[Android] Fixed a error that occurred when getting info about tracks
 
 1.0.3
 

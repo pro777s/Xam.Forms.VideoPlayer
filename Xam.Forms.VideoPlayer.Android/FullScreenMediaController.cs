@@ -37,9 +37,9 @@ namespace Xam.Forms.VideoPlayer.Android
             base.SetAnchorView(view);
             ibFullScreen = new ImageButton(Context);
             ibFullScreen.SetBackgroundColor(Color.Transparent);
-            int layoutPx = DPtoPx(40, view.Context);
-            int topMarginPx = DPtoPx(10, view.Context);
-            int leftMarginPx = DPtoPx(5, view.Context);
+            int layoutPx = DiPtoPx(40, view.Context);
+            int topMarginPx = DiPtoPx(10, view.Context);
+            int leftMarginPx = DiPtoPx(5, view.Context);
             LayoutParams layoutParams =
             new LayoutParams(layoutPx, layoutPx, GravityFlags.NoGravity)
             {
@@ -53,15 +53,16 @@ namespace Xam.Forms.VideoPlayer.Android
             AddView(ibFullScreen, layoutParams);
             ibFullScreen.SetOnClickListener(new OnClickListener());
             layoutParams =
-            new LayoutParams(DPtoPx(40, view.Context), DPtoPx(10, view.Context), GravityFlags.Right)
+            new LayoutParams(DiPtoPx(56, view.Context), DiPtoPx(16, view.Context), GravityFlags.Right)
             {
-                TopMargin = DPtoPx(5, view.Context),
-                //RightMargin = DPtoPx(5, view.Context),
+                TopMargin = DiPtoPx(5, view.Context),
+                RightMargin = DiPtoPx(5, view.Context),
             };
             tvVideoSize = new TextView(Context);
             tvVideoSize.SetBackgroundColor(Color.Transparent);
             tvVideoSize.SetTextColor(Color.White);
-            tvVideoSize.SetTextSize(ComplexUnitType.Pt, 4);
+            tvVideoSize.SetTextSize(ComplexUnitType.Pt, 6);
+            tvVideoSize.Gravity = GravityFlags.Right;
             AddView(tvVideoSize, layoutParams);
         }
 
@@ -73,7 +74,7 @@ namespace Xam.Forms.VideoPlayer.Android
             tvVideoSize.SetText(videoSizeText.ToCharArray(), 0, videoSizeText.Length);
         }
 
-        private static int DPtoPx(float dp, Context context)
+        private static int DiPtoPx(float dp, Context context)
         {
             float fpx = TypedValue.ApplyDimension(ComplexUnitType.Dip, dp, context.Resources.DisplayMetrics);
             return (int)Math.Round(fpx);

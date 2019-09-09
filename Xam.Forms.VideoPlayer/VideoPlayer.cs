@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace Xam.Forms.VideoPlayer
@@ -107,7 +108,13 @@ namespace Xam.Forms.VideoPlayer
 
         void SetTimeToEnd()
         {
-            TimeToEnd = Duration - Position;
+            try { TimeToEnd = Duration - Position; }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine("Duration: {Duration}");
+                Debug.WriteLine("Position: {Position}");
+            }
         }
 
         // Methods handled by renderers

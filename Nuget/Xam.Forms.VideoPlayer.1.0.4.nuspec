@@ -2,18 +2,23 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Xam.Forms.VideoPlayer</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <title>Video Player Control for Xamarin.Forms</title>
     <authors>Roman Pristinsky</authors>
     <owners>pro777</owners>
     <projectUrl>https://github.com/pro777s/Xam.Forms.VideoPlayer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
-    <description>The package Xam.Forms.VideoPlayer is intended for Xamarin.Forms, contains a cross-platform video player for Android, iOS and Windows UWP, based on the code provided by Charles Petzold. 
-More information about the video player can be found here: https://developer.xamarin.com/samples/xamarin-forms/customrenderers/VideoPlayerDemos/.
-This package can be freely used for distribution, commercial use and modification.</description>
+    <description>
+      The package Xam.Forms.VideoPlayer is intended for Xamarin.Forms, contains a cross-platform video player for Android, iOS and Windows UWP, based on the code provided by Charles Petzold.
+      More information about the video player can be found here: https://docs.microsoft.com/ru-ru/samples/xamarin/xamarin-forms-samples/customrenderers-videoplayerdemos/.
+      This package can be freely used for distribution, commercial use and modification.</description>
     <summary>The package Xam.Forms.VideoPlayer is intended for Xamarin.Forms, contains a cross-platform video player for Android, iOS and Windows UWP, based on the code provided by Charles Petzold.</summary>
-    <releaseNotes>1.0.3
+    <releaseNotes>1.0.4
+      [All] Fixed a potential error that occurred when calculating the remaining playback time.
+      [Android] Increased font size to display video size.
+      [Android] Fixed a error that occurred when getting info about tracks
+      1.0.3
       [Android] Fixed positioning of the button for changing the visibility of the statusbar. Added video size output.
       1.0.2
       [Android] Changed class MainActivity. Now it implements the interface IActivityLifecycleCallbacks.
