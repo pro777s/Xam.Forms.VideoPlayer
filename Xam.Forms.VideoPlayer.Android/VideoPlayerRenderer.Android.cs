@@ -36,18 +36,25 @@ namespace Xam.Forms.VideoPlayer.Android
     {
         public bool OnInfo(MediaPlayer mp, [GeneratedEnum] MediaInfo what, int extra)
         {
-            MediaPlayer.TrackInfo[] trackInfoArray = mp.GetTrackInfo();
-            if (trackInfoArray == null)
-                return true;
-            for (int i = 0; i < trackInfoArray.Length; i++)
+            try
             {
-                // you can switch out the language comparison logic to whatever works for you
-                if (trackInfoArray[i].TrackType == MediaTrackType.Audio
-                    && trackInfoArray[i].Language == Locale.Default.ISO3Language)
+                MediaPlayer.TrackInfo[] trackInfoArray = mp.GetTrackInfo();
+                if (trackInfoArray == null)
+                    return true;
+                for (int i = 0; i < trackInfoArray.Length; i++)
                 {
-                    mp.SelectTrack(i);
-                    break;
+                    // you can switch out the language comparison logic to whatever works for you
+                    if (trackInfoArray[i].TrackType == MediaTrackType.Audio
+                        && trackInfoArray[i].Language == Locale.Default.ISO3Language)
+                    {
+                        mp.SelectTrack(i);
+                        break;
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
             }
             return true;
         }
@@ -131,17 +138,17 @@ namespace Xam.Forms.VideoPlayer.Android
             videoHeight = mp.VideoHeight;
             videoWidth = mp.VideoWidth;
             //mp.SetOnVideoSizeChangedListener(new MediaPlayerVideoSizeChangedListener());
-            MediaPlayer.TrackInfo[] trackInfoArray = mp.GetTrackInfo();
-            if (trackInfoArray != null)
-            {
-                MediaPlayer.TrackInfo videoTrack = new List<MediaPlayer.TrackInfo>(trackInfoArray)
-                .Where(x => x.TrackType == MediaTrackType.Video).FirstOrDefault();
-                if (videoTrack != null)
-                {
-                    int descrFlags = videoTrack.DescribeContents();
-                    MediaFormat mediaFormat = videoTrack.Format;
-                }
-            }
+            //MediaPlayer.TrackInfo[] trackInfoArray = mp.GetTrackInfo();
+            //if (trackInfoArray != null)
+            //{
+            //    MediaPlayer.TrackInfo videoTrack = new List<MediaPlayer.TrackInfo>(trackInfoArray)
+            //    .Where(x => x.TrackType == MediaTrackType.Video).FirstOrDefault();
+            //    if (videoTrack != null)
+            //    {
+            //        int descrFlags = videoTrack.DescribeContents();
+            //        MediaFormat mediaFormat = videoTrack.Format;
+            //    }
+            //}
             mediaController.ShowVideoSize(videoWidth, videoHeight);
         }
 

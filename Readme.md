@@ -40,6 +40,10 @@ For more information, see the folder Samples.
 
 #### Release Notes
 
+1.0.5
+
+[Android] Fixed a potential error that occurred when on get video info. 
+
 1.0.4
 
 [All] Fixed a potential error that occurred when calculating the remaining playback time.
