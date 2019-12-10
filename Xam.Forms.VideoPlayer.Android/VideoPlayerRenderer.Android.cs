@@ -105,6 +105,7 @@ namespace Xam.Forms.VideoPlayer.Android
                 }
 
                 SetAreTransportControlsEnabled();
+                SetShowTransportControls();
                 SetSource();
 
                 args.NewElement.UpdateStatus += OnUpdateStatus;
@@ -149,7 +150,8 @@ namespace Xam.Forms.VideoPlayer.Android
             //        MediaFormat mediaFormat = videoTrack.Format;
             //    }
             //}
-            mediaController.ShowVideoSize(videoWidth, videoHeight);
+            if(Element.AreTransportControlsEnabled)
+                mediaController.ShowVideoSize(videoWidth, videoHeight);
         }
 
         protected override void Dispose(bool disposing)
@@ -180,16 +182,51 @@ namespace Xam.Forms.VideoPlayer.Android
             {
                 SetAreTransportControlsEnabled();
             }
+            else if (args.PropertyName == VideoPlayer.ShowTransportControlsProperty.PropertyName)
+            {
+                SetShowTransportControls();
+            }
             else if (args.PropertyName == VideoPlayer.SourceProperty.PropertyName)
             {
                 SetSource();
             }
             else if (args.PropertyName == VideoPlayer.PositionProperty.PropertyName)
             {
+                if (videoView.CurrentPosition < Element.Position.TotalMilliseconds)
+                {
+                    if (!videoView.CanSeekForward())
+                        return;
+                }
+                if (videoView.CurrentPosition > Element.Position.TotalMilliseconds)
+                {
+                    if (!videoView.CanSeekBackward())
+                        return;
+                }
                 if (Math.Abs(videoView.CurrentPosition - Element.Position.TotalMilliseconds) > 1000)
                 {
+                    if (Element.AreTransportControlsEnabled)
+                    {
+                        //mediaController.Show(1000);
+                        mediaController.Show();
+                        Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+                        {
+                            mediaController.Hide();
+                            return false;
+                        });
+                    }
                     videoView.SeekTo((int)Element.Position.TotalMilliseconds);
                 }
+            }
+        }
+
+        private void SetShowTransportControls()
+        {
+            if (Element.AreTransportControlsEnabled)
+            {
+                if (Element.ShowTransportControls)
+                    mediaController.Show();
+                else
+                    mediaController.Hide();
             }
         }
 

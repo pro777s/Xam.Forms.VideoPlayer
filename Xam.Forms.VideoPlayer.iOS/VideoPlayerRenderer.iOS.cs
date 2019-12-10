@@ -57,6 +57,7 @@ namespace Xam.Forms.VideoPlayer.iOS
                 }
 
                 SetAreTransportControlsEnabled();
+                SetShowTransportControls();
                 SetSource();
 
                 args.NewElement.UpdateStatus += OnUpdateStatus;
@@ -105,6 +106,10 @@ namespace Xam.Forms.VideoPlayer.iOS
             {
                 SetAreTransportControlsEnabled();
             }
+            else if (args.PropertyName == VideoPlayer.ShowTransportControlsProperty.PropertyName)
+            {
+                SetShowTransportControls();
+            }
             else if (args.PropertyName == VideoPlayer.SourceProperty.PropertyName)
             {
                 SetSource();
@@ -115,8 +120,29 @@ namespace Xam.Forms.VideoPlayer.iOS
 
                 if (Math.Abs((controlPosition - Element.Position).TotalSeconds) > 1)
                 {
+                    if (Element.AreTransportControlsEnabled)
+                    {
+                        ((AVPlayerViewController)ViewController).ShowsPlaybackControls = true;
+                        Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+                        {
+                            ((AVPlayerViewController)ViewController).ShowsPlaybackControls = false;
+                            return false;
+                        });
+                    }
                     player.Seek(CMTime.FromSeconds(Element.Position.TotalSeconds, 1));
                 }
+            }
+        }
+
+        private void SetShowTransportControls()
+
+        {
+            if (Element.AreTransportControlsEnabled)
+            {
+                if (Element.ShowTransportControls)
+                    ((AVPlayerViewController)ViewController).ShowsPlaybackControls = true;
+                else
+                    ((AVPlayerViewController)ViewController).ShowsPlaybackControls = false;
             }
         }
 

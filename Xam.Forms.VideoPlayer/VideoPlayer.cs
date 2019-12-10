@@ -27,6 +27,16 @@ namespace Xam.Forms.VideoPlayer
             get { return (bool)GetValue(AreTransportControlsEnabledProperty); }
         }
 
+        // ShowTransportControls property
+        public static readonly BindableProperty ShowTransportControlsProperty =
+            BindableProperty.Create(nameof(ShowTransportControls), typeof(bool), typeof(VideoPlayer), false);
+
+        public bool ShowTransportControls
+        {
+            set { SetValue(ShowTransportControlsProperty, value); }
+            get { return (bool)GetValue(ShowTransportControlsProperty); }
+        }
+
         // Source property
         public static readonly BindableProperty SourceProperty =
             BindableProperty.Create(nameof(Source), typeof(VideoSource), typeof(VideoPlayer), null);

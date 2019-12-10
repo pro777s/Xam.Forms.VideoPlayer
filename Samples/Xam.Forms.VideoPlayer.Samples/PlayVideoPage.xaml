@@ -17,10 +17,11 @@
             </Grid.RowDefinitions>
             <video:VideoPlayer Grid.Row="0" x:Name="videoPlayer"
                 BackgroundColor="{StaticResource BackColor}"
-                HorizontalOptions="FillAndExpand" 
+                HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 PlayCompletion="VideoPlayer_PlayCompletion" 
                 PlayError="VideoPlayer_PlayError"/>
+                <!--AreTransportControlsEnabled="False"-->
             <ActivityIndicator Grid.Row="0" 
                 HorizontalOptions="Center"
                 VerticalOptions="Center"

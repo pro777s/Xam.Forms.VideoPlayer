@@ -40,6 +40,11 @@ For more information, see the folder Samples.
 
 #### Release Notes
 
+1.0.6
+
+[All] ShowTransportControls property added.
+[Android] Fixed bug when setting the AreTransportControlsEnabled property.
+
 1.0.5
 
 [Android] Fixed a potential error that occurred when on get video info. 

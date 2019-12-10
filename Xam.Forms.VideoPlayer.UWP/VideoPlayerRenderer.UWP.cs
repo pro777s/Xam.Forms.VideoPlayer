@@ -37,6 +37,7 @@ namespace Xam.Forms.VideoPlayer.UWP
                 }
 
                 SetAreTransportControlsEnabled();
+                SetShowTransportControls();
                 SetSource();
                 SetAutoPlay();
 
@@ -108,6 +109,10 @@ namespace Xam.Forms.VideoPlayer.UWP
             {
                 SetAreTransportControlsEnabled();
             }
+            else if (args.PropertyName == VideoPlayer.ShowTransportControlsProperty.PropertyName)
+            {
+                SetShowTransportControls();
+            }
             else if (args.PropertyName == VideoPlayer.SourceProperty.PropertyName)
             {
                 SetSource();
@@ -118,10 +123,32 @@ namespace Xam.Forms.VideoPlayer.UWP
             }
             else if (args.PropertyName == VideoPlayer.PositionProperty.PropertyName)
             {
+                if (!Control.CanSeek)
+                    return;
                 if (Math.Abs((Control.Position - Element.Position).TotalSeconds) > 1)
                 {
+                    if (Element.AreTransportControlsEnabled)
+                    {
+                        Control.TransportControls.Show();
+                        Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+                        {
+                            Control.TransportControls.Hide();
+                            return false;
+                        });
+                    }
                     Control.Position = Element.Position;
                 }
+            }
+        }
+
+        private void SetShowTransportControls()
+        {
+            if (Element.AreTransportControlsEnabled)
+            {
+                if (Element.ShowTransportControls)
+                    Control.TransportControls.Show();
+                else
+                    Control.TransportControls.Hide();
             }
         }
 

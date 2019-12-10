@@ -18,6 +18,9 @@ namespace Xam.Forms.VideoPlayer.Samples
         {
             _videoSource = videoSource;
             InitializeComponent();
+            //Device.StartTimer(TimeSpan.FromSeconds(30), () => { videoPlayer.Position += TimeSpan.FromMinutes(1); return false; });  
+            //Device.StartTimer(TimeSpan.FromSeconds(10), () => { videoPlayer.Pause(); videoPlayer.ShowTransportControls = true; return false; });
+            //videoPlayer.ShowTransportControls = true;
         }
 
         protected override void OnAppearing()
