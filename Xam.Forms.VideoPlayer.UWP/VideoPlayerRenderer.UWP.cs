@@ -37,7 +37,6 @@ namespace Xam.Forms.VideoPlayer.UWP
                 }
 
                 SetAreTransportControlsEnabled();
-                SetShowTransportControls();
                 SetSource();
                 SetAutoPlay();
 
@@ -45,6 +44,8 @@ namespace Xam.Forms.VideoPlayer.UWP
                 args.NewElement.PlayRequested += OnPlayRequested;
                 args.NewElement.PauseRequested += OnPauseRequested;
                 args.NewElement.StopRequested += OnStopRequested;
+                args.NewElement.ShowTransportControlsRequested += OnShowTransportControls;
+                args.NewElement.HideTransportControlsRequested += OnHideTransportControls;
             }
 
             if (args.OldElement != null)
@@ -53,6 +54,8 @@ namespace Xam.Forms.VideoPlayer.UWP
                 args.OldElement.PlayRequested -= OnPlayRequested;
                 args.OldElement.PauseRequested -= OnPauseRequested;
                 args.OldElement.StopRequested -= OnStopRequested;
+                args.OldElement.ShowTransportControlsRequested -= OnShowTransportControls;
+                args.OldElement.HideTransportControlsRequested -= OnHideTransportControls;
             }
         }
 
@@ -109,10 +112,6 @@ namespace Xam.Forms.VideoPlayer.UWP
             {
                 SetAreTransportControlsEnabled();
             }
-            else if (args.PropertyName == VideoPlayer.ShowTransportControlsProperty.PropertyName)
-            {
-                SetShowTransportControls();
-            }
             else if (args.PropertyName == VideoPlayer.SourceProperty.PropertyName)
             {
                 SetSource();
@@ -141,13 +140,18 @@ namespace Xam.Forms.VideoPlayer.UWP
             }
         }
 
-        private void SetShowTransportControls()
+        private void OnShowTransportControls(object sender, EventArgs args)
         {
             if (Element.AreTransportControlsEnabled)
             {
-                if (Element.ShowTransportControls)
                     Control.TransportControls.Show();
-                else
+            }
+        }
+
+        private void OnHideTransportControls(object sender, EventArgs args)
+        {
+            if (Element.AreTransportControlsEnabled)
+            {
                     Control.TransportControls.Hide();
             }
         }

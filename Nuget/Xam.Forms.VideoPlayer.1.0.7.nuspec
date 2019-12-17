@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Xam.Forms.VideoPlayer</id>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <title>Video Player Control for Xamarin.Forms</title>
     <authors>Roman Pristinsky</authors>
     <owners>pro777</owners>
@@ -14,7 +14,11 @@
       More information about the video player can be found here: https://docs.microsoft.com/ru-ru/samples/xamarin/xamarin-forms-samples/customrenderers-videoplayerdemos/.
       This package can be freely used for distribution, commercial use and modification.</description>
     <summary>The package Xam.Forms.VideoPlayer is intended for Xamarin.Forms, contains a cross-platform video player for Android, iOS and Windows UWP, based on the code provided by Charles Petzold.</summary>
-    <releaseNotes>1.0.6
+    <releaseNotes>
+      1.0.7
+      [All] Removed ShowTransportControls property. Instead, the ShowTransportControls() and HideTransportControls() methods are added.
+      [UWP] Project compilation error due to the lack of a Xam.Forms.VideoPlayer.UWP.xr.xml file has been fixed.
+      1.0.6
       [All] ShowTransportControls property added.
       [Android] Fixed bug when setting the AreTransportControlsEnabled property.
       1.0.5
@@ -37,7 +41,7 @@
     <tags>Xamarin, VideoPlayer</tags>
     <dependencies>
       <group>
-        <dependency id="Xamarin.Forms" version="4.2.0.709249" />
+        <dependency id="Xamarin.Forms" version="4.4.0.991265" />
       </group>
     </dependencies>
     <references>
@@ -76,6 +80,7 @@
     <file src="..\Xam.Forms.VideoPlayer.UWP\bin\Release\Xam.Forms.VideoPlayer.dll" target="lib\UAP10.0" />
     <file src="..\Xam.Forms.VideoPlayer.UWP\bin\Release\Xam.Forms.VideoPlayer.UWP.dll" target="lib\UAP10.0" />
     <file src="..\Xam.Forms.VideoPlayer.UWP\bin\Release\Xam.Forms.VideoPlayer.UWP.pri" target="lib\UAP10.0" />
+    <file src="..\Xam.Forms.VideoPlayer.UWP\bin\Release\Xam.Forms.VideoPlayer.UWP.xr.xml" target="lib\UAP10.0\Xam.Forms.VideoPlayer.UWP" />
 
   </files>
 </package>

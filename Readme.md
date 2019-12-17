@@ -40,6 +40,11 @@ For more information, see the folder Samples.
 
 #### Release Notes
 
+1.0.7
+
+[All] Removed ShowTransportControls property. Instead, the ShowTransportControls() and HideTransportControls() methods are added.
+[UWP] Project compilation error due to the lack of a Xam.Forms.VideoPlayer.UWP.xr.xml file has been fixed.
+
 1.0.6
 
 [All] ShowTransportControls property added.

@@ -27,16 +27,6 @@ namespace Xam.Forms.VideoPlayer
             get { return (bool)GetValue(AreTransportControlsEnabledProperty); }
         }
 
-        // ShowTransportControls property
-        public static readonly BindableProperty ShowTransportControlsProperty =
-            BindableProperty.Create(nameof(ShowTransportControls), typeof(bool), typeof(VideoPlayer), false);
-
-        public bool ShowTransportControls
-        {
-            set { SetValue(ShowTransportControlsProperty, value); }
-            get { return (bool)GetValue(ShowTransportControlsProperty); }
-        }
-
         // Source property
         public static readonly BindableProperty SourceProperty =
             BindableProperty.Create(nameof(Source), typeof(VideoSource), typeof(VideoPlayer), null);
@@ -147,6 +137,20 @@ namespace Xam.Forms.VideoPlayer
         public void Stop()
         {
             StopRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler ShowTransportControlsRequested;
+
+        public void ShowTransportControls()
+        {
+            ShowTransportControlsRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler HideTransportControlsRequested;
+
+        public void HideTransportControls()
+        {
+            HideTransportControlsRequested?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler PlayCompletion;

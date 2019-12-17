@@ -57,13 +57,14 @@ namespace Xam.Forms.VideoPlayer.iOS
                 }
 
                 SetAreTransportControlsEnabled();
-                SetShowTransportControls();
                 SetSource();
 
                 args.NewElement.UpdateStatus += OnUpdateStatus;
                 args.NewElement.PlayRequested += OnPlayRequested;
                 args.NewElement.PauseRequested += OnPauseRequested;
                 args.NewElement.StopRequested += OnStopRequested;
+                args.NewElement.ShowTransportControlsRequested += OnShowTransportControls;
+                args.NewElement.HideTransportControlsRequested += OnHideTransportControls;
             }
 
             if (args.OldElement != null)
@@ -72,6 +73,8 @@ namespace Xam.Forms.VideoPlayer.iOS
                 args.OldElement.PlayRequested -= OnPlayRequested;
                 args.OldElement.PauseRequested -= OnPauseRequested;
                 args.OldElement.StopRequested -= OnStopRequested;
+                args.OldElement.ShowTransportControlsRequested -= OnShowTransportControls;
+                args.OldElement.HideTransportControlsRequested -= OnHideTransportControls;
             }
         }
 
@@ -106,10 +109,6 @@ namespace Xam.Forms.VideoPlayer.iOS
             {
                 SetAreTransportControlsEnabled();
             }
-            else if (args.PropertyName == VideoPlayer.ShowTransportControlsProperty.PropertyName)
-            {
-                SetShowTransportControls();
-            }
             else if (args.PropertyName == VideoPlayer.SourceProperty.PropertyName)
             {
                 SetSource();
@@ -134,14 +133,18 @@ namespace Xam.Forms.VideoPlayer.iOS
             }
         }
 
-        private void SetShowTransportControls()
-
+        private void OnShowTransportControls(object sender, EventArgs args)
         {
             if (Element.AreTransportControlsEnabled)
             {
-                if (Element.ShowTransportControls)
                     ((AVPlayerViewController)ViewController).ShowsPlaybackControls = true;
-                else
+            }
+        }
+
+        private void OnHideTransportControls(object sender, EventArgs args)
+        {
+            if (Element.AreTransportControlsEnabled)
+            {
                     ((AVPlayerViewController)ViewController).ShowsPlaybackControls = false;
             }
         }
