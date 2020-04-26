@@ -28,7 +28,7 @@ Xam.Forms.VideoPlayer.iOS.VideoPlayerRenderer.Init();
 Xamarin.Forms.Init();
 ```
 
-In UWP platform:
+In UWP platform (App.xaml.cs) call:
 
 ```
 Xamarin.Forms.DependencyService.Register<VideoPicker>();

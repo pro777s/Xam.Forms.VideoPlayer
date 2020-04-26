@@ -117,6 +117,19 @@ namespace Xam.Forms.VideoPlayer
             }
         }
 
+        // IsBuffering property
+        public static readonly BindableProperty IsBufferingProperty = BindableProperty.Create(
+                                                         propertyName: "IsBuffering",
+                                                         returnType: typeof(Boolean),
+                                                         declaringType: typeof(VideoPlayer),
+                                                         defaultValue: false,
+                                                         defaultBindingMode: BindingMode.TwoWay);
+        public Boolean IsBuffering
+        {
+            get { return (Boolean)GetValue(IsBufferingProperty); }
+            set { SetValue(IsBufferingProperty, value); }
+        }
+
         // Methods handled by renderers
         public event EventHandler PlayRequested;
 
@@ -171,6 +184,28 @@ namespace Xam.Forms.VideoPlayer
         public void OnPlayError(object sender, PlayErrorEventArgs e)
         {
             PlayError?.Invoke(this, e);
+        }
+
+        public event EventHandler BufferingStart;
+
+        public void OnBufferingStart()
+        {
+            if(IsBuffering == false) 
+            {
+                IsBuffering = true;
+                BufferingStart?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public event EventHandler BufferingEnd;
+
+        public void OnBufferingEnd()
+        {
+            if (IsBuffering)
+            {
+                IsBuffering = false;
+                BufferingEnd?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }

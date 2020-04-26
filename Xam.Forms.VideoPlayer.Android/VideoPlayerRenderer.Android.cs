@@ -32,34 +32,6 @@ namespace Xam.Forms.VideoPlayer.Android
         }
     }
 
-    public class MediaPlayerInfoListener : Java.Lang.Object, MediaPlayer.IOnInfoListener
-    {
-        public bool OnInfo(MediaPlayer mp, [GeneratedEnum] MediaInfo what, int extra)
-        {
-            try
-            {
-                MediaPlayer.TrackInfo[] trackInfoArray = mp.GetTrackInfo();
-                if (trackInfoArray == null)
-                    return true;
-                for (int i = 0; i < trackInfoArray.Length; i++)
-                {
-                    // you can switch out the language comparison logic to whatever works for you
-                    if (trackInfoArray[i].TrackType == MediaTrackType.Audio
-                        && trackInfoArray[i].Language == Locale.Default.ISO3Language)
-                    {
-                        mp.SelectTrack(i);
-                        break;
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-            }
-            return true;
-        }
-    }
-
     public class VideoPlayerRenderer : ViewRenderer<VideoPlayer, ARelativeLayout>
     {
         VideoView videoView;
@@ -138,23 +110,51 @@ namespace Xam.Forms.VideoPlayer.Android
 
         private void VideoView_Info(object sender, MediaPlayer.InfoEventArgs e)
         {
-            MediaPlayer mp = e.Mp;
-            videoHeight = mp.VideoHeight;
-            videoWidth = mp.VideoWidth;
-            //mp.SetOnVideoSizeChangedListener(new MediaPlayerVideoSizeChangedListener());
-            //MediaPlayer.TrackInfo[] trackInfoArray = mp.GetTrackInfo();
-            //if (trackInfoArray != null)
-            //{
-            //    MediaPlayer.TrackInfo videoTrack = new List<MediaPlayer.TrackInfo>(trackInfoArray)
-            //    .Where(x => x.TrackType == MediaTrackType.Video).FirstOrDefault();
-            //    if (videoTrack != null)
-            //    {
-            //        int descrFlags = videoTrack.DescribeContents();
-            //        MediaFormat mediaFormat = videoTrack.Format;
-            //    }
-            //}
-            if(Element.AreTransportControlsEnabled)
-                mediaController.ShowVideoSize(videoWidth, videoHeight);
+            try
+            {
+                switch (e.What)
+                {
+                    case MediaInfo.BufferingStart:
+                        Element.OnBufferingStart();
+                        break;
+                    case MediaInfo.BufferingEnd:
+                        Element.OnBufferingEnd();
+                        break;
+                    case MediaInfo.VideoRenderingStart:
+                        //e.Mp.SetOnVideoSizeChangedListener(new MediaPlayerVideoSizeChangedListener());
+                        MediaPlayer.TrackInfo[] trackInfoArray = e.Mp.GetTrackInfo();
+                        if (trackInfoArray != null)
+                        {
+                            for (int i = 0; i < trackInfoArray.Length; i++)
+                            {
+                                // you can switch out the language comparison logic to whatever works for you
+                                if (trackInfoArray[i].TrackType == MediaTrackType.Audio
+                                    && trackInfoArray[i].Language == Locale.Default.ISO3Language)
+                                {
+                                    e.Mp.SelectTrack(i);
+                                    break;
+                                }
+                            }
+                            //MediaPlayer.TrackInfo videoTrack = new List<MediaPlayer.TrackInfo>(trackInfoArray)
+                            //.Where(x => x.TrackType == MediaTrackType.Video).FirstOrDefault();
+                            //if (videoTrack != null)
+                            //{
+                            //    int descrFlags = videoTrack.DescribeContents();
+                            //    MediaFormat mediaFormat = videoTrack.Format;
+                            //}
+                        }
+                        MediaPlayer mp = e.Mp;
+                        videoHeight = mp.VideoHeight;
+                        videoWidth = mp.VideoWidth;
+                        if (Element.AreTransportControlsEnabled)
+                            mediaController.ShowVideoSize(videoWidth, videoHeight);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -314,6 +314,9 @@ namespace Xam.Forms.VideoPlayer.Android
             // Set Position property
             TimeSpan timeSpan = TimeSpan.FromMilliseconds(videoView.CurrentPosition);
             ((IElementController)Element).SetValueFromRenderer(VideoPlayer.PositionProperty, timeSpan);
+
+            if (videoView.IsPlaying == false)
+                Element.OnBufferingEnd();
         }
 
         // Event handlers to implement methods

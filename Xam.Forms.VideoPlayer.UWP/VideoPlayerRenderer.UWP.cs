@@ -91,12 +91,16 @@ namespace Xam.Forms.VideoPlayer.UWP
 
             switch (Control.CurrentState)
             {
+                case MediaElementState.Buffering:
+                    Element.OnBufferingStart();
+                    break;
                 case MediaElementState.Playing:
+                    Element.OnBufferingEnd();
                     videoStatus = VideoStatus.Playing;
                     break;
-
                 case MediaElementState.Paused:
                 case MediaElementState.Stopped:
+                    Element.OnBufferingEnd();
                     videoStatus = VideoStatus.Paused;
                     break;
             }

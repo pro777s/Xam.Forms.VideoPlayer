@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Xam.Forms.VideoPlayer</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

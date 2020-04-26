@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Xam.Forms.VideoPlayer</id>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <title>Video Player Control for Xamarin.Forms</title>
     <authors>Roman Pristinsky</authors>
     <owners>pro777</owners>
@@ -15,6 +15,8 @@
       This package can be freely used for distribution, commercial use and modification.</description>
     <summary>The package Xam.Forms.VideoPlayer is intended for Xamarin.Forms, contains a cross-platform video player for Android, iOS and Windows UWP, based on the code provided by Charles Petzold.</summary>
     <releaseNotes>
+      1.0.8
+      [All] BufferingStart and BufferingEnd events are added.
       1.0.7
       [All] Removed ShowTransportControls property. Instead, the ShowTransportControls() and HideTransportControls() methods are added.
       [UWP] Project compilation error due to the lack of a Xam.Forms.VideoPlayer.UWP.xr.xml file has been fixed.

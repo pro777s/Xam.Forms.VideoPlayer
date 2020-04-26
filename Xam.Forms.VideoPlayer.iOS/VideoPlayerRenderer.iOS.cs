@@ -25,6 +25,7 @@ namespace Xam.Forms.VideoPlayer.iOS
         AVPlayerItem playerItem;
         AVPlayerViewController _playerViewController;       // solely for ViewController property
         NSObject playCompleteNotification, playerItemFailedToPlayToEndTimeNotification;
+        NSObject playbackBufferEmptyObserver, playbackLikelyToKeepUpObserver, playbackBufferFullObserver;
 
         public override UIViewController ViewController => _playerViewController;
 
@@ -98,7 +99,15 @@ namespace Xam.Forms.VideoPlayer.iOS
                 playerItemFailedToPlayToEndTimeNotification.Dispose();
                 NSNotificationCenter.DefaultCenter.RemoveObserver(playCompleteNotification);
                 player.ReplaceCurrentItemWithPlayerItem(null);
+                DisposePlaybackBufferObservers();
             }
+        }
+
+        private void DisposePlaybackBufferObservers()
+        {
+            playbackBufferEmptyObserver?.Dispose();
+            playbackLikelyToKeepUpObserver?.Dispose();
+            playbackBufferFullObserver?.Dispose();
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -214,11 +223,27 @@ namespace Xam.Forms.VideoPlayer.iOS
 
             player.ReplaceCurrentItemWithPlayerItem(playerItem);
 
-            if (playerItem != null && Element.AutoPlay)
+            if (playerItem != null)
             {
-                player.Play();
+
+                //playbackBufferEmptyObserver = (NSObject)playerItem.AddObserver("playbackBufferEmpty",
+                //    NSKeyValueObservingOptions.New,
+                //    AVPlayerItem_BufferUpdated);
+
+                playbackLikelyToKeepUpObserver = (NSObject)playerItem.AddObserver("playbackLikelyToKeepUp",
+                    NSKeyValueObservingOptions.New,
+                    AVPlayerItem_BufferUpdated);
+
+                //playbackBufferFullObserver = (NSObject)playerItem.AddObserver("playbackBufferFull",
+                //    NSKeyValueObservingOptions.New,
+                //    AVPlayerItem_BufferUpdated);
+
+                if (Element.AutoPlay)
+                    player.Play();
             }
         }
+
+        #if DEBUG
 
         private static void ExploreProperties(AVAsset asset)
         {
@@ -246,6 +271,8 @@ namespace Xam.Forms.VideoPlayer.iOS
             }
         }
 
+        #endif
+
         // Event handler to update status
         void OnUpdateStatus(object sender, EventArgs args)
         {
@@ -261,6 +288,7 @@ namespace Xam.Forms.VideoPlayer.iOS
                             break;
 
                         case AVPlayerTimeControlStatus.Paused:
+                            Element.OnBufferingEnd();
                             videoStatus = VideoStatus.Paused;
                             break;
                     }
@@ -296,6 +324,31 @@ namespace Xam.Forms.VideoPlayer.iOS
         {
             player.Pause();
             player.Seek(new CMTime(0, 1));
+        }
+
+        //private void AVPlayerItem_BufferUpdated(NSObservedChange e)
+        //{
+        //    if (playerItem.PlaybackBufferEmpty)
+        //    {
+        //        Element.OnBufferingStart();
+        //    }
+        //    else if (playerItem.PlaybackBufferFull)
+        //    {
+        //        Element.OnBufferingEnd();
+        //    }
+        //}
+
+        private void AVPlayerItem_BufferUpdated(NSObservedChange e)
+        {
+            var isBuffering = !playerItem?.PlaybackLikelyToKeepUp;
+            if (isBuffering == true && Element.IsBuffering == false)
+            {
+                Element.OnBufferingStart();
+            }
+            else if(Element.IsBuffering)
+            {
+                Element.OnBufferingEnd();
+            }
         }
     }
 }

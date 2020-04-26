@@ -53,5 +53,15 @@ namespace Xam.Forms.VideoPlayer.Samples
             videoPlayer.Stop();
             base.OnDisappearing();
         }
+
+        private void VideoPlayer_BufferingStart(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VideoPlayer_BufferingEnd(object sender, EventArgs e)
+        {
+
+        }
     }
 }

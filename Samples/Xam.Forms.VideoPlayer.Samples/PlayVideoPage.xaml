@@ -20,7 +20,9 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 PlayCompletion="VideoPlayer_PlayCompletion" 
-                PlayError="VideoPlayer_PlayError"/>
+                PlayError="VideoPlayer_PlayError"
+                BufferingStart="VideoPlayer_BufferingStart"
+                BufferingEnd="VideoPlayer_BufferingEnd"/>
                 <!--AreTransportControlsEnabled="False"-->
             <ActivityIndicator Grid.Row="0" 
                 HorizontalOptions="Center"
@@ -33,6 +35,13 @@
                                  Binding="{Binding Source={x:Reference videoPlayer}, 
                                                    Path=Status}"
                                  Value="{x:Static video:VideoStatus.NotReady}">
+                        <Setter Property="IsVisible" Value="True" />
+                        <Setter Property="IsRunning" Value="True" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="ActivityIndicator"
+                                 Binding="{Binding Source={x:Reference videoPlayer}, 
+                                                   Path=IsBuffering}"
+                                 Value="true">
                         <Setter Property="IsVisible" Value="True" />
                         <Setter Property="IsRunning" Value="True" />
                     </DataTrigger>

@@ -63,12 +63,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Forms">
-      <Version>4.4.0.991265</Version>
-    </PackageReference>
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xam.Forms.VideoPlayer\Xam.Forms.VideoPlayer.csproj">
       <Project>{7133710c-433b-4e29-989e-5a95db59cf79}</Project>
@@ -87,6 +81,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_fullscreen_exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>4.4.0.991265</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
