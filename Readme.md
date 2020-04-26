@@ -40,6 +40,10 @@ For more information, see the folder Samples.
 
 #### Release Notes
 
+1.0.8
+
+[All] BufferingStart and BufferingEnd events are added.
+
 1.0.7
 
 [All] Removed ShowTransportControls property. Instead, the ShowTransportControls() and HideTransportControls() methods are added.
