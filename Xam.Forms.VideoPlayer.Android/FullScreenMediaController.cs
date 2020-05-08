@@ -98,10 +98,14 @@ namespace Xam.Forms.VideoPlayer.Android
         {
             if (IsFullScreen())
             {
+            var activity = Context as Activity;
+                activity.RequestedOrientation = ScreenOrientation.Portrait;
                 ExitFromFullScreen();
             }
             else
             {
+               var activity = Context as Activity;
+                activity.RequestedOrientation = ScreenOrientation.Landscape;
                 EnterToFullScreen();
             }
         }
